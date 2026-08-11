@@ -9,11 +9,16 @@ function formatDate(value) {
     return "Undated";
   }
 
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) {
+    return "Undated";
+  }
+
   return new Intl.DateTimeFormat("en", {
     month: "long",
     day: "numeric",
     year: "numeric"
-  }).format(new Date(`${value}T00:00:00`));
+  }).format(date);
 }
 
 function SetupNotice({ message }) {
