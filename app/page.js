@@ -4,6 +4,8 @@ import MastheadUnlock from "@/app/components/MastheadUnlock";
 
 export const dynamic = "force-dynamic";
 
+const NEWSPAPER_PAGE_LENGTH_BUDGET = 1550;
+
 function formatDate(value) {
   if (!value) {
     return "Undated";
@@ -42,9 +44,59 @@ function EmptyState() {
   );
 }
 
-export default async function HomePage() {
+function articleSize(summary) {
+  const length = String(summary || "").length;
+
+  if (length > 170) {
+    return "long";
+  }
+
+  if (length > 115) {
+    return "medium";
+  }
+
+  return "short";
+}
+
+function pageNumberFrom(value) {
+  const pageValue = Array.isArray(value) ? value[0] : value;
+  const page = Number.parseInt(pageValue || "1", 10);
+  return Number.isFinite(page) && page > 0 ? page : 1;
+}
+
+function articleLengthScore(article) {
+  return 180 + String(article.title || "").length * 1.25 + String(article.summary || "").length;
+}
+
+function paginateArticlesByLength(articles) {
+  const pages = [];
+  let page = [];
+  let pageLength = 0;
+
+  articles.forEach((article) => {
+    const articleLength = articleLengthScore(article);
+
+    if (page.length > 0 && pageLength + articleLength > NEWSPAPER_PAGE_LENGTH_BUDGET) {
+      pages.push(page);
+      page = [];
+      pageLength = 0;
+    }
+
+    page.push(article);
+    pageLength += articleLength;
+  });
+
+  if (page.length > 0) {
+    pages.push(page);
+  }
+
+  return pages;
+}
+
+export default async function HomePage({ searchParams }) {
   let articles = [];
   let error = null;
+  const requestedPage = pageNumberFrom((await searchParams)?.page);
 
   try {
     articles = await getArticles();
@@ -54,6 +106,10 @@ export default async function HomePage() {
 
   const lead = articles[0];
   const rest = articles.slice(1);
+  const articlePages = paginateArticlesByLength(rest);
+  const totalPages = Math.max(1, articlePages.length);
+  const currentPage = Math.min(requestedPage, totalPages);
+  const pageArticles = articlePages[currentPage - 1] || [];
 
   return (
     <main className="paper-shell">
@@ -96,10 +152,10 @@ export default async function HomePage() {
             </aside>
           </section>
 
-          {rest.length > 0 && (
+          {pageArticles.length > 0 && (
             <section className="article-grid" aria-label="More articles">
-              {rest.map((article) => (
-                <article key={article.slug} className="article-card">
+              {pageArticles.map((article) => (
+                <article key={article.slug} className={`article-card article-card-${articleSize(article.summary)}`}>
                   <p className="kicker">{article.category}</p>
                   <h2>
                     <Link href={`/article/${article.slug}`}>{article.title}</Link>
@@ -112,6 +168,28 @@ export default async function HomePage() {
                 </article>
               ))}
             </section>
+          )}
+
+          {totalPages > 1 && (
+            <nav className="edition-pagination" aria-label="Newspaper pages">
+              <Link
+                className={currentPage === 1 ? "pagination-link disabled" : "pagination-link"}
+                href={currentPage === 1 ? "/" : `/?page=${currentPage - 1}`}
+                aria-disabled={currentPage === 1}
+              >
+                Previous page
+              </Link>
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
+              <Link
+                className={currentPage === totalPages ? "pagination-link disabled" : "pagination-link"}
+                href={currentPage === totalPages ? `/?page=${currentPage}` : `/?page=${currentPage + 1}`}
+                aria-disabled={currentPage === totalPages}
+              >
+                Next page
+              </Link>
+            </nav>
           )}
         </>
       )}
