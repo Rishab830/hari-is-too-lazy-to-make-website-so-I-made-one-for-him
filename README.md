@@ -36,6 +36,8 @@ articles/
 
 The publish form accepts only `.md` files. It writes normalized frontmatter with `title`, `author`, `category`, `summary`, `date`, and `slug`.
 
+To open the publish form, click the masthead title five times within five seconds and enter the admin password.
+
 ## Validation
 
 ```bash

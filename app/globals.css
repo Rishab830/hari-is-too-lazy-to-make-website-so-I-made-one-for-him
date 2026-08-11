@@ -95,6 +95,23 @@ code {
   text-transform: uppercase;
 }
 
+.masthead-title-button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+  font: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+}
+
+.masthead-title-button:disabled {
+  color: inherit;
+}
+
 .masthead p {
   margin: 8px 0 0;
   color: var(--muted);

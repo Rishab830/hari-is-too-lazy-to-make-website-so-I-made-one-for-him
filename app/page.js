@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArticleError, getArticles } from "@/lib/articles";
+import MastheadUnlock from "@/app/components/MastheadUnlock";
 
 export const dynamic = "force-dynamic";
 
@@ -32,7 +33,6 @@ function EmptyState() {
       <p className="kicker">No Articles</p>
       <h2>The press is quiet</h2>
       <p>Published Markdown files from the GitHub <code>articles/</code> directory will appear here.</p>
-      <Link className="button" href="/publish">Open publish desk</Link>
     </section>
   );
 }
@@ -56,9 +56,9 @@ export default async function HomePage() {
         <div className="masthead-top">
           <span>Independent Edition</span>
           <span>{formatDate(new Date().toISOString().slice(0, 10))}</span>
-          <Link href="/publish">Publish</Link>
+          <span>Public Dispatch</span>
         </div>
-        <h1>The Hari Herald</h1>
+        <MastheadUnlock />
         <p>News, notes, and dispatches</p>
       </header>
 

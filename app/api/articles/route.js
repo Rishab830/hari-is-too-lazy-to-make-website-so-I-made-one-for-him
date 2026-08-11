@@ -1,4 +1,5 @@
 import { ArticleError, getArticles, publishMarkdownArticle } from "@/lib/articles";
+import { hasAdminSession } from "@/lib/admin";
 
 export const dynamic = "force-dynamic";
 
@@ -20,10 +21,9 @@ export async function GET() {
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const passcode = String(formData.get("passcode") || "");
 
-    if (!process.env.ADMIN_PASSCODE || passcode !== process.env.ADMIN_PASSCODE) {
-      throw new ArticleError("Invalid publish passcode.", 401);
+    if (!(await hasAdminSession())) {
+      throw new ArticleError("Admin session required.", 401);
     }
 
     const file = formData.get("file");
