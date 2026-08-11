@@ -4,7 +4,7 @@ import MastheadUnlock from "@/app/components/MastheadUnlock";
 
 export const dynamic = "force-dynamic";
 
-const NEWSPAPER_PAGE_LENGTH_BUDGET = 1550;
+const NEWSPAPER_PAGE_LENGTH_BUDGET = 4200;
 
 function formatDate(value) {
   if (!value) {
@@ -44,20 +44,6 @@ function EmptyState() {
   );
 }
 
-function articleSize(summary) {
-  const length = String(summary || "").length;
-
-  if (length > 170) {
-    return "long";
-  }
-
-  if (length > 115) {
-    return "medium";
-  }
-
-  return "short";
-}
-
 function pageNumberFrom(value) {
   const pageValue = Array.isArray(value) ? value[0] : value;
   const page = Number.parseInt(pageValue || "1", 10);
@@ -65,7 +51,12 @@ function pageNumberFrom(value) {
 }
 
 function articleLengthScore(article) {
-  return 180 + String(article.title || "").length * 1.25 + String(article.summary || "").length;
+  return (
+    170 +
+    String(article.title || "").length * 1.6 +
+    String(article.summary || "").length * 1.35 +
+    Math.min(Number(article.articleLength) || 0, 1200) * 0.28
+  );
 }
 
 function paginateArticlesByLength(articles) {
@@ -91,6 +82,20 @@ function paginateArticlesByLength(articles) {
   }
 
   return pages;
+}
+
+function articleLayout(article, index) {
+  const score = articleLengthScore(article);
+  const rows = Math.max(4, Math.min(9, Math.round(score / 82)));
+  const shouldGoWide = score > 575 || (score > 470 && index % 3 === 1);
+  const shouldGoTall = score > 500 || index % 5 === 2;
+
+  return {
+    className: shouldGoWide ? "article-card-wide" : "article-card-narrow",
+    style: {
+      "--story-rows": shouldGoTall ? rows + 1 : rows
+    }
+  };
 }
 
 export default async function HomePage({ searchParams }) {
@@ -154,8 +159,11 @@ export default async function HomePage({ searchParams }) {
 
           {pageArticles.length > 0 && (
             <section className="article-grid" aria-label="More articles">
-              {pageArticles.map((article) => (
-                <article key={article.slug} className={`article-card article-card-${articleSize(article.summary)}`}>
+              {pageArticles.map((article, index) => {
+                const layout = articleLayout(article, index);
+
+                return (
+                <article key={article.slug} className={`article-card ${layout.className}`} style={layout.style}>
                   <p className="kicker">{article.category}</p>
                   <h2>
                     <Link href={`/article/${article.slug}`}>{article.title}</Link>
@@ -166,7 +174,8 @@ export default async function HomePage({ searchParams }) {
                     <span>{formatDate(article.date)}</span>
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </section>
           )}
 
