@@ -86,16 +86,23 @@ function paginateArticlesByLength(articles) {
 
 function articleLayout(article, index) {
   const score = articleLengthScore(article);
-  const rows = Math.max(4, Math.min(9, Math.round(score / 82)));
-  const shouldGoWide = score > 575 || (score > 470 && index % 3 === 1);
-  const shouldGoTall = score > 500 || index % 5 === 2;
+  const shouldGoSplash = score > 650 || index === 3;
+  const shouldGoWide = score > 520 || index % 4 === 1;
+  const shouldGoColumn = score < 430 && index % 3 !== 0;
 
-  return {
-    className: shouldGoWide ? "article-card-wide" : "article-card-narrow",
-    style: {
-      "--story-rows": shouldGoTall ? rows + 1 : rows
-    }
-  };
+  if (shouldGoSplash) {
+    return "article-card-splash";
+  }
+
+  if (shouldGoWide) {
+    return "article-card-wide";
+  }
+
+  if (shouldGoColumn) {
+    return "article-card-column";
+  }
+
+  return "article-card-standard";
 }
 
 export default async function HomePage({ searchParams }) {
@@ -163,7 +170,7 @@ export default async function HomePage({ searchParams }) {
                 const layout = articleLayout(article, index);
 
                 return (
-                <article key={article.slug} className={`article-card ${layout.className}`} style={layout.style}>
+                <article key={article.slug} className={`article-card ${layout}`}>
                   <p className="kicker">{article.category}</p>
                   <h2>
                     <Link href={`/article/${article.slug}`}>{article.title}</Link>

@@ -250,38 +250,41 @@ code {
 
 .article-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-flow: dense;
-  grid-auto-rows: 38px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  align-items: start;
   gap: 0;
   padding-top: 14px;
 }
 
 .article-card {
-  display: flex;
-  flex-direction: column;
   min-width: 0;
-  min-height: calc(var(--story-rows, 6) * 38px);
   padding: clamp(18px, 3vw, 24px);
-  grid-column: span 1;
-  grid-row: span var(--story-rows, 6);
+  grid-column: span 4;
+  align-self: start;
+  border-top: 1px solid rgba(43, 33, 26, 0.42);
   border-right: 1px solid rgba(43, 33, 26, 0.42);
   border-bottom: 1px solid rgba(43, 33, 26, 0.42);
 }
 
+.article-card-splash {
+  grid-column: span 7;
+}
+
 .article-card-wide {
-  grid-column: span 2;
+  grid-column: span 6;
 }
 
-.article-card-wide h2 {
-  font-size: clamp(1.9rem, 4vw, 3.1rem);
+.article-card-standard {
+  grid-column: span 5;
 }
 
-.article-card-narrow:nth-child(4n + 2) {
-  border-top: 1px solid rgba(43, 33, 26, 0.42);
+.article-card-column {
+  grid-column: span 3;
 }
 
-.article-card-wide:nth-child(odd) {
+.article-card-splash:nth-child(odd),
+.article-card-wide:nth-child(3n) {
   border-left: 1px solid rgba(43, 33, 26, 0.42);
 }
 
@@ -289,12 +292,20 @@ code {
   font-size: clamp(1.55rem, 3vw, 2.25rem);
 }
 
-.article-card p:not(.kicker) {
-  color: var(--muted);
+.article-card-splash h2 {
+  font-size: clamp(2.05rem, 4.6vw, 3.45rem);
 }
 
-.article-card .byline {
-  margin-top: auto;
+.article-card-wide h2 {
+  font-size: clamp(1.85rem, 4vw, 3rem);
+}
+
+.article-card-column h2 {
+  font-size: clamp(1.35rem, 2.7vw, 2rem);
+}
+
+.article-card p:not(.kicker) {
+  color: var(--muted);
 }
 
 .edition-pagination {
