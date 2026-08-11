@@ -2,7 +2,6 @@
 title: Library Clock Restored After Decade
 author: City Reporter
 category: Heritage
-summary: The long-silent clock above the central library rang again after a volunteer repair team completed months of careful restoration work.
 date: 2026-08-06
 slug: library-clock-restored-after-decade
 ---

@@ -34,7 +34,7 @@ Articles are stored as Markdown files in the configured GitHub repository under:
 articles/
 ```
 
-The publish form accepts only `.md` files. It writes normalized frontmatter with `title`, `author`, `category`, `summary`, `date`, and `slug`.
+The publish form accepts only `.md` files. It writes normalized frontmatter with `title`, `author`, `category`, `date`, and `slug`.
 
 To open the publish form, click the masthead title five times within five seconds and enter the admin password in the newspaper-styled access form.
 

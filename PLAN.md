@@ -5,8 +5,7 @@ Build a real Next.js app from the empty workspace, deployed on Vercel, with a pu
 
 ## Key Changes
 - Create a Next.js app with:
-  - Public home page showing all articles in a newspaper layout.
-  - Article detail pages with bold Times New Roman headings and readable newspaper typography.
+  - Public home page showing all full articles in a newspaper layout.
   - Protected `/publish` page with an admin passcode, metadata fields, and Markdown file upload.
 - Use a rich cream paper visual style:
   - Paper-texture background using CSS.
@@ -14,11 +13,10 @@ Build a real Next.js app from the empty workspace, deployed on Vercel, with a pu
   - Clean serif editorial layout.
   - Elevated buttons with sharp, pointed shadows.
 - Store articles in GitHub under an `articles/` directory as Markdown files with frontmatter:
-  - `title`, `author`, `category`, `summary`, `date`, `slug`.
+  - `title`, `author`, `category`, `date`, `slug`.
   - Body content comes directly from the uploaded Markdown file.
 - Add server routes:
-  - `GET /api/articles` lists article metadata from GitHub.
-  - `GET /api/articles/[slug]` fetches one article.
+  - `GET /api/articles` lists full articles from GitHub.
   - `POST /api/articles` validates passcode, validates the `.md` upload, normalizes frontmatter, and commits it to GitHub.
 
 ## Implementation Details
@@ -35,7 +33,7 @@ Build a real Next.js app from the empty workspace, deployed on Vercel, with a pu
 - Show helpful upload errors for invalid passcode, unsupported file type, missing metadata, duplicate commit conflicts, or GitHub API failure.
 
 ## Test Plan
-- Verify public users can read the homepage and article pages without any passcode.
+- Verify public users can read all article contents on the homepage without any passcode.
 - Verify upload rejects wrong passcodes and non-`.md` files.
 - Verify valid Markdown upload creates a file in GitHub and appears in the article list.
 - Verify Markdown frontmatter is parsed and normalized correctly.

@@ -2,7 +2,6 @@
 title: Bakery Wins Regional Prize
 author: Food Column
 category: Food
-summary: A family bakery on Station Road won a regional prize for its cardamom bread.
 date: 2026-08-04
 slug: bakery-wins-regional-prize
 ---

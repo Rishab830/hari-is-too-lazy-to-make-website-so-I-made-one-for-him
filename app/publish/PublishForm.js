@@ -1,13 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 
 const initialState = {
   title: "",
   author: "",
   category: "",
-  summary: "",
   date: new Date().toISOString().slice(0, 10)
 };
 
@@ -73,11 +71,6 @@ export default function PublishForm() {
       </div>
 
       <label>
-        Summary
-        <textarea name="summary" value={fields.summary} onChange={updateField} rows="4" required />
-      </label>
-
-      <label>
         Date
         <input name="date" type="date" value={fields.date} onChange={updateField} required />
       </label>
@@ -103,11 +96,7 @@ export default function PublishForm() {
         </p>
       )}
 
-      {published && (
-        <Link className="published-link" href={`/article/${published.slug}`}>
-          Read {published.title}
-        </Link>
-      )}
+      {published && <p className="published-link">Published {published.title}</p>}
     </form>
   );
 }

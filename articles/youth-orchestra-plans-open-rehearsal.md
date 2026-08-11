@@ -2,7 +2,6 @@
 title: Youth Orchestra Plans Open Rehearsal
 author: Music Desk
 category: Arts
-summary: The youth orchestra will hold an open rehearsal at the town hall this weekend, inviting families to watch section practice, meet conductors, and hear early excerpts from the winter program.
 date: 2026-07-28
 slug: youth-orchestra-plans-open-rehearsal
 ---

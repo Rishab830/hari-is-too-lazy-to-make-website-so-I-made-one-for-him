@@ -2,7 +2,6 @@
 title: Clinic Expands Evening Hours
 author: Health Bureau
 category: Health
-summary: The municipal clinic will keep two counters open later into the evening so working families can collect reports, refill routine prescriptions, and schedule follow-up visits after office hours.
 date: 2026-07-31
 slug: clinic-expands-evening-hours
 ---

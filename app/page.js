@@ -1,4 +1,6 @@
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { ArticleError, getArticles } from "@/lib/articles";
 import MastheadUnlock from "@/app/components/MastheadUnlock";
 
@@ -54,8 +56,7 @@ function articleLengthScore(article) {
   return (
     170 +
     String(article.title || "").length * 1.6 +
-    String(article.summary || "").length * 1.35 +
-    Math.min(Number(article.articleLength) || 0, 1200) * 0.28
+    Math.min(Number(article.articleLength) || 0, 2400) * 0.85
   );
 }
 
@@ -86,9 +87,9 @@ function paginateArticlesByLength(articles) {
 
 function articleLayout(article, index) {
   const score = articleLengthScore(article);
-  const shouldGoSplash = score > 650 || index === 3;
-  const shouldGoWide = score > 520 || index % 4 === 1;
-  const shouldGoColumn = score < 430 && index % 3 !== 0;
+  const shouldGoSplash = score > 1100 || index === 3;
+  const shouldGoWide = score > 760 || index % 4 === 1;
+  const shouldGoColumn = score < 620 && index % 3 !== 0;
 
   if (shouldGoSplash) {
     return "article-card-splash";
@@ -103,6 +104,20 @@ function articleLayout(article, index) {
   }
 
   return "article-card-standard";
+}
+
+function articleBodyColumns(article) {
+  const length = Number(article.articleLength) || 0;
+
+  if (length > 950) {
+    return "article-card-body-3";
+  }
+
+  if (length > 560) {
+    return "article-card-body-2";
+  }
+
+  return "article-card-body-1";
 }
 
 export default async function HomePage({ searchParams }) {
@@ -143,23 +158,18 @@ export default async function HomePage({ searchParams }) {
         <>
           <section className="lead-grid">
             <article className="lead-story">
-              <p className="kicker">{lead.category}</p>
-              <h2>
-                <Link href={`/article/${lead.slug}`}>{lead.title}</Link>
-              </h2>
-              <p className="summary">{lead.summary}</p>
-              <div className="byline">
-                <span>{lead.author}</span>
-                <span>{formatDate(lead.date)}</span>
+              <h2>{lead.title}</h2>
+              <div className={`article-card-body ${articleBodyColumns(lead)}`}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{lead.content}</ReactMarkdown>
               </div>
             </article>
             <aside className="index-box">
               <p className="kicker">Index</p>
               {articles.slice(0, 6).map((article) => (
-                <Link key={article.slug} href={`/article/${article.slug}`}>
+                <div key={article.slug}>
                   <span>{article.category}</span>
                   {article.title}
-                </Link>
+                </div>
               ))}
             </aside>
           </section>
@@ -170,17 +180,12 @@ export default async function HomePage({ searchParams }) {
                 const layout = articleLayout(article, index);
 
                 return (
-                <article key={article.slug} className={`article-card ${layout}`}>
-                  <p className="kicker">{article.category}</p>
-                  <h2>
-                    <Link href={`/article/${article.slug}`}>{article.title}</Link>
-                  </h2>
-                  <p>{article.summary}</p>
-                  <div className="byline">
-                    <span>{article.author}</span>
-                    <span>{formatDate(article.date)}</span>
-                  </div>
-                </article>
+                  <article key={article.slug} className={`article-card ${layout}`}>
+                    <h2>{article.title}</h2>
+                    <div className={`article-card-body ${articleBodyColumns(article)}`}>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.content}</ReactMarkdown>
+                    </div>
+                  </article>
                 );
               })}
             </section>

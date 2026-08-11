@@ -2,7 +2,6 @@
 title: Market Stalls Return To Old Quarter
 author: Meera Shah
 category: Local Business
-summary: Vendors reopened beneath the clock tower, bringing fresh produce, handmade goods, and weekend crowds back to the square.
 date: 2026-08-10
 slug: market-stalls-return-to-old-quarter
 ---

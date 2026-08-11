@@ -2,7 +2,6 @@
 title: Monsoon Clouds Bring Cooler Week
 author: Weather Bureau
 category: Weather
-summary: Cloud cover and scattered showers are expected to keep temperatures lower through the middle of the week.
 date: 2026-08-08
 slug: monsoon-clouds-bring-cooler-week
 ---

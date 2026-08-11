@@ -2,7 +2,6 @@
 title: Schools Open Shared Reading Room
 author: Arun Nair
 category: Education
-summary: Three neighborhood schools have opened a common reading room stocked with donated books and student newspapers.
 date: 2026-08-09
 slug: schools-open-reading-room
 ---

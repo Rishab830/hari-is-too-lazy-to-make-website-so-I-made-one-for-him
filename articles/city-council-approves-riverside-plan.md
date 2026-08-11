@@ -2,7 +2,6 @@
 title: City Council Approves Riverside Plan
 author: Editorial Desk
 category: Civic Affairs
-summary: A late evening vote moved the riverside renewal plan forward after hours of public comment and debate.
 date: 2026-08-11
 slug: city-council-approves-riverside-plan
 ---

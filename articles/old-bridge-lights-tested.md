@@ -2,7 +2,6 @@
 title: Old Bridge Lights Tested
 author: Night Desk
 category: Infrastructure
-summary: Workers tested the first row of restored lamps along the old bridge, giving pedestrians a preview of the warmer lighting planned for the full crossing.
 date: 2026-07-29
 slug: old-bridge-lights-tested
 ---

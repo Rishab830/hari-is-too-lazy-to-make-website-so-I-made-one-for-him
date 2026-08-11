@@ -38,7 +38,6 @@ export async function POST(request) {
         title: formData.get("title"),
         author: formData.get("author"),
         category: formData.get("category"),
-        summary: formData.get("summary"),
         date: formData.get("date")
       }
     });

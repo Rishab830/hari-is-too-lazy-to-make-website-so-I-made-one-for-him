@@ -2,7 +2,6 @@
 title: Theatre Group Announces New Season
 author: Culture Correspondent
 category: Arts
-summary: The city theatre group unveiled a four-play season focused on family dramas, political satire, and modern adaptations.
 date: 2026-08-07
 slug: theatre-group-announces-new-season
 ---

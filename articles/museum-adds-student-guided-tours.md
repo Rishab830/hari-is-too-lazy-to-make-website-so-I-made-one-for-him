@@ -2,7 +2,6 @@
 title: Museum Adds Student Guided Tours
 author: Culture Desk
 category: Museums
-summary: The city museum introduced short student-led tours.
 date: 2026-07-30
 slug: museum-adds-student-guided-tours
 ---

@@ -179,28 +179,9 @@ code {
   border-bottom: 3px solid var(--line);
 }
 
-.lead-story {
-  column-count: 2;
-  column-gap: 32px;
-}
-
-.lead-story .kicker,
-.lead-story h2,
-.lead-story .summary,
-.lead-story .byline {
-  break-inside: avoid;
-}
-
 .lead-story h2 {
   margin-bottom: 18px;
-  column-span: all;
   font-size: clamp(2.5rem, 6vw, 5.2rem);
-}
-
-.summary {
-  color: var(--muted);
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  font-style: italic;
 }
 
 .kicker {
@@ -230,7 +211,7 @@ code {
   background: rgba(255, 248, 231, 0.45);
 }
 
-.index-box a {
+.index-box div {
   display: block;
   padding: 12px 0;
   border-top: 1px solid rgba(43, 33, 26, 0.35);
@@ -306,6 +287,85 @@ code {
 
 .article-card p:not(.kicker) {
   color: var(--muted);
+}
+
+.article-card-body {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.8vw, 1.12rem);
+  text-align: justify;
+  text-wrap: pretty;
+  column-gap: clamp(18px, 3vw, 30px);
+}
+
+.article-card-body-1 {
+  column-count: 1;
+}
+
+.article-card-body-2 {
+  column-count: 2;
+}
+
+.article-card-body-3 {
+  column-count: 3;
+}
+
+.article-card-body h1,
+.article-card-body h2,
+.article-card-body h3 {
+  margin: 1em 0 0.35em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  line-height: 1;
+  break-after: avoid;
+}
+
+.article-card-body h1 {
+  font-size: 1.75rem;
+}
+
+.article-card-body h2 {
+  font-size: 1.45rem;
+}
+
+.article-card-body h3 {
+  font-size: 1.2rem;
+}
+
+.article-card-body p,
+.article-card-body ul,
+.article-card-body ol,
+.article-card-body blockquote,
+.article-card-body table {
+  margin: 0 0 0.9em;
+}
+
+.article-card-body blockquote {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--accent);
+  font-style: italic;
+}
+
+.article-card-body ul,
+.article-card-body ol {
+  padding-left: 1.2rem;
+}
+
+.article-card-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  break-inside: avoid;
+}
+
+.article-card-body th,
+.article-card-body td {
+  border: 1px solid rgba(43, 33, 26, 0.4);
+  padding: 0.35rem;
+}
+
+.article-card-column .article-card-body,
+.article-card-standard .article-card-body {
+  column-count: 1;
 }
 
 .edition-pagination {
@@ -564,10 +624,6 @@ textarea:focus {
     grid-auto-rows: auto;
   }
 
-  .lead-story {
-    column-count: 1;
-  }
-
   .article-card {
     min-height: 0;
     grid-column: span 1;
@@ -577,6 +633,12 @@ textarea:focus {
 
   .edition-pagination {
     flex-direction: column;
+  }
+
+  .article-card-body,
+  .article-card-body-2,
+  .article-card-body-3 {
+    column-count: 1;
   }
 
   .article-header h1 {

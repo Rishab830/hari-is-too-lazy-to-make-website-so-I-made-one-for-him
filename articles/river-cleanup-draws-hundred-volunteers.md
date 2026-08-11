@@ -2,7 +2,6 @@
 title: River Cleanup Draws Hundred Volunteers
 author: Environment Desk
 category: Environment
-summary: Volunteers gathered before sunrise to clear plastic, cloth, and construction debris from the riverbank.
 date: 2026-08-01
 slug: river-cleanup-draws-hundred-volunteers
 ---

@@ -2,7 +2,6 @@
 title: New Bus Route Links Two Suburbs
 author: Transit Desk
 category: Transport
-summary: A new cross-town bus route will connect two growing suburbs with the railway station, cutting a common commute by nearly twenty minutes during morning hours.
 date: 2026-08-05
 slug: new-bus-route-links-two-suburbs
 ---

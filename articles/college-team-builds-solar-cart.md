@@ -2,7 +2,6 @@
 title: College Team Builds Solar Cart
 author: Science Desk
 category: Innovation
-summary: Engineering students presented a solar-powered service cart designed for campus maintenance crews, with a compact battery system and a lightweight frame built from recycled parts.
 date: 2026-08-02
 slug: college-team-builds-solar-cart
 ---
