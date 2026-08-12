@@ -61,7 +61,8 @@ function blockStyle(block) {
     "--block-top": `${block.y}px`,
     "--block-width": `${(block.w / GRID_COLUMNS) * 100}%`,
     "--block-height": `${block.h}px`,
-    "--body-columns": block.bodyColumns || 1
+    "--body-columns": block.bodyColumns || 1,
+    "--title-size": block.titleSize ? `${block.titleSize}px` : undefined
   };
 }
 

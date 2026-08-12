@@ -218,32 +218,38 @@ code {
 .layout-article h2 {
   margin: 0 0 0.35em;
   font-family: "Times New Roman", Times, serif;
+  font-size: var(--title-size, 2rem);
   font-weight: 900;
   line-height: 0.94;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .layout-priority-0 h2 {
-  font-size: clamp(3.4rem, 7vw, 5.8rem);
+  font-size: var(--title-size, clamp(3rem, 6.2vw, 5.2rem));
 }
 
 .layout-priority-1 h2,
 .layout-priority-2 h2 {
-  font-size: clamp(2rem, 4.2vw, 3.35rem);
+  font-size: var(--title-size, clamp(1.9rem, 3.6vw, 2.9rem));
 }
 
 .layout-priority-3 h2,
 .layout-priority-4 h2 {
-  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  font-size: var(--title-size, clamp(1.45rem, 2.6vw, 2.15rem));
 }
 
 .layout-article-body {
   color: var(--muted);
   column-count: var(--body-columns);
-  column-gap: clamp(16px, 2.4vw, 28px);
-  font-size: clamp(0.95rem, 1.55vw, 1.08rem);
-  line-height: 1.48;
+  column-gap: 26px;
+  font-size: clamp(0.9rem, 1.28vw, 1rem);
+  line-height: 1.42;
   text-align: justify;
+  text-justify: inter-word;
   text-wrap: pretty;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .layout-article-body h1,
