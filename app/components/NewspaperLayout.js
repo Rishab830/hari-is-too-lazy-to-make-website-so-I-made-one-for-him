@@ -71,6 +71,19 @@ function ImageBlock({ block, setMeasurementNode, measureWidth, pageWidth, isMeas
   );
 }
 
+function AdBlock({ block }) {
+  return (
+    <aside
+      className={`layout-block layout-ad${block.h < 150 ? " layout-ad-compact" : ""}`}
+      style={blockStyle(block)}
+    >
+      <p>{block.ad.label}</p>
+      <h2>{block.ad.title}</h2>
+      <span>{block.ad.body}</span>
+    </aside>
+  );
+}
+
 function NewspaperPage({ page, pageNumber, totalPages }) {
   return (
     <section
@@ -81,6 +94,8 @@ function NewspaperPage({ page, pageNumber, totalPages }) {
       {page.blocks.map((block) =>
         block.kind === "image" ? (
           <ImageBlock key={`${block.id}-${block.x}-${block.y}-${block.w}`} block={block} />
+        ) : block.kind === "ad" ? (
+          <AdBlock key={`${block.id}-${block.x}-${block.y}-${block.w}`} block={block} />
         ) : (
           <ArticleBlock key={`${block.id}-${block.x}-${block.y}-${block.w}`} block={block} />
         )

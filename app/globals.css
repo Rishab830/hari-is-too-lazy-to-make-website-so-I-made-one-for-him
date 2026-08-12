@@ -342,6 +342,64 @@ code {
   text-transform: uppercase;
 }
 
+.layout-ad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 3px double rgba(43, 33, 26, 0.62);
+  background:
+    repeating-linear-gradient(0deg, rgba(43, 33, 26, 0.04) 0, rgba(43, 33, 26, 0.04) 1px, transparent 1px, transparent 5px),
+    rgba(255, 248, 231, 0.32);
+  text-align: center;
+}
+
+.layout-ad p {
+  margin: 0 0 0.55rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.layout-ad h2 {
+  margin: 0 auto 0.5rem;
+  max-width: 15ch;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(1.35rem, 2.6vw, 2.4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.layout-ad span {
+  display: block;
+  margin: 0 auto;
+  max-width: 24ch;
+  color: var(--muted);
+  font-size: clamp(0.78rem, 1.2vw, 0.95rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.layout-ad-compact {
+  padding: 10px;
+}
+
+.layout-ad-compact p {
+  margin-bottom: 0.25rem;
+  font-size: 0.62rem;
+}
+
+.layout-ad-compact h2 {
+  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+}
+
+.layout-ad-compact span {
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
 .computed-page-folio {
   position: absolute;
   right: 0;
