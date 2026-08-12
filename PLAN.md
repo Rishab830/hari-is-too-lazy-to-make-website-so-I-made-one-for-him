@@ -5,7 +5,7 @@ Build a real Next.js app from the empty workspace, deployed on Vercel, with a pu
 
 ## Key Changes
 - Create a Next.js app with:
-  - Public home page showing all full articles in a newspaper layout.
+  - Public home page showing all full articles in a computed newspaper layout.
   - Protected `/publish` page with an admin passcode, metadata fields, and Markdown file upload.
 - Use a rich cream paper visual style:
   - Paper-texture background using CSS.
@@ -18,6 +18,8 @@ Build a real Next.js app from the empty workspace, deployed on Vercel, with a pu
 - Add server routes:
   - `GET /api/articles` lists full articles from GitHub.
   - `POST /api/articles` validates passcode, validates the `.md` upload, normalizes frontmatter, and commits it to GitHub.
+- Add a server-side layout engine:
+  - Sort articles by date, extract Markdown images, assign 6-column grid widths by recency, pack blocks with a guillotine-style rectangle allocator, and spill text continuations onto later newspaper pages.
 
 ## Implementation Details
 - Use Vercel environment variables:

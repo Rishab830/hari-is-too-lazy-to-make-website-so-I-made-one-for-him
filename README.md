@@ -2,6 +2,8 @@
 
 A newspaper-style Next.js site for reading public Markdown articles and publishing new articles into a GitHub repository.
 
+The front page uses a server-side computed layout engine. Articles are sorted by date, assigned widths on a 6-column grid, packed into fixed-height newspaper pages, and continued onto later pages when they overflow.
+
 ## Local Setup
 
 1. Install dependencies:

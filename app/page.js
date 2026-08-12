@@ -2,11 +2,10 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArticleError, getArticles } from "@/lib/articles";
+import { createNewspaperPages, GRID_COLUMNS, PAGE_HEIGHT } from "@/lib/layout";
 import MastheadUnlock from "@/app/components/MastheadUnlock";
 
 export const dynamic = "force-dynamic";
-
-const NEWSPAPER_PAGE_LENGTH_BUDGET = 4200;
 
 function formatDate(value) {
   if (!value) {
@@ -31,7 +30,9 @@ function SetupNotice({ message }) {
       <p className="kicker">Configuration</p>
       <h2>GitHub article source is not connected</h2>
       <p>{message}</p>
-      <p>Add the values from <code>.env.example</code> in Vercel or <code>.env.local</code>.</p>
+      <p>
+        Add the values from <code>.env.example</code> in Vercel or <code>.env.local</code>.
+      </p>
     </section>
   );
 }
@@ -41,7 +42,9 @@ function EmptyState() {
     <section className="notice">
       <p className="kicker">No Articles</p>
       <h2>The press is quiet</h2>
-      <p>Published Markdown files from the GitHub <code>articles/</code> directory will appear here.</p>
+      <p>
+        Published Markdown files from the GitHub <code>articles/</code> directory will appear here.
+      </p>
     </section>
   );
 }
@@ -52,72 +55,62 @@ function pageNumberFrom(value) {
   return Number.isFinite(page) && page > 0 ? page : 1;
 }
 
-function articleLengthScore(article) {
+function blockStyle(block) {
+  return {
+    "--block-left": `${(block.x / GRID_COLUMNS) * 100}%`,
+    "--block-top": `${block.y}px`,
+    "--block-width": `${(block.w / GRID_COLUMNS) * 100}%`,
+    "--block-height": `${block.h}px`,
+    "--body-columns": block.bodyColumns || 1
+  };
+}
+
+function ArticleBlock({ block }) {
+  const title = block.continued ? `${block.article.title}, continued` : block.article.title;
+
   return (
-    170 +
-    String(article.title || "").length * 1.6 +
-    Math.min(Number(article.articleLength) || 0, 2400) * 0.85
+    <article
+      className={`layout-block layout-article layout-priority-${Math.min(block.index, 4)}`}
+      style={blockStyle(block)}
+    >
+      {block.showTitle && <h2>{title}</h2>}
+      <div className="layout-article-body">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{block.content}</ReactMarkdown>
+      </div>
+    </article>
   );
 }
 
-function paginateArticlesByLength(articles) {
-  const pages = [];
-  let page = [];
-  let pageLength = 0;
-
-  articles.forEach((article) => {
-    const articleLength = articleLengthScore(article);
-
-    if (page.length > 0 && pageLength + articleLength > NEWSPAPER_PAGE_LENGTH_BUDGET) {
-      pages.push(page);
-      page = [];
-      pageLength = 0;
-    }
-
-    page.push(article);
-    pageLength += articleLength;
-  });
-
-  if (page.length > 0) {
-    pages.push(page);
-  }
-
-  return pages;
+function ImageBlock({ block }) {
+  return (
+    <figure className="layout-block layout-image" style={blockStyle(block)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={block.image.src} alt={block.image.alt} />
+      {block.image.title && <figcaption>{block.image.title}</figcaption>}
+    </figure>
+  );
 }
 
-function articleLayout(article, index) {
-  const score = articleLengthScore(article);
-  const shouldGoSplash = score > 1100 || index === 3;
-  const shouldGoWide = score > 760 || index % 4 === 1;
-  const shouldGoColumn = score < 620 && index % 3 !== 0;
+function NewspaperPage({ page, pageNumber, totalPages }) {
+  return (
+    <section
+      className="computed-newspaper-page"
+      style={{ "--page-height": `${PAGE_HEIGHT}px` }}
+      aria-label={`Newspaper page ${pageNumber}`}
+    >
+      {page.blocks.map((block) =>
+        block.kind === "image" ? (
+          <ImageBlock key={`${block.id}-${block.x}-${block.y}`} block={block} />
+        ) : (
+          <ArticleBlock key={`${block.id}-${block.x}-${block.y}`} block={block} />
+        )
+      )}
 
-  if (shouldGoSplash) {
-    return "article-card-splash";
-  }
-
-  if (shouldGoWide) {
-    return "article-card-wide";
-  }
-
-  if (shouldGoColumn) {
-    return "article-card-column";
-  }
-
-  return "article-card-standard";
-}
-
-function articleBodyColumns(article) {
-  const length = Number(article.articleLength) || 0;
-
-  if (length > 950) {
-    return "article-card-body-3";
-  }
-
-  if (length > 560) {
-    return "article-card-body-2";
-  }
-
-  return "article-card-body-1";
+      <div className="computed-page-folio">
+        Page {pageNumber} of {totalPages}
+      </div>
+    </section>
+  );
 }
 
 export default async function HomePage({ searchParams }) {
@@ -131,12 +124,10 @@ export default async function HomePage({ searchParams }) {
     error = caught;
   }
 
-  const lead = articles[0];
-  const rest = articles.slice(1);
-  const articlePages = paginateArticlesByLength(rest);
-  const totalPages = Math.max(1, articlePages.length);
+  const pages = error || articles.length === 0 ? [] : createNewspaperPages(articles);
+  const totalPages = Math.max(1, pages.length);
   const currentPage = Math.min(requestedPage, totalPages);
-  const pageArticles = articlePages[currentPage - 1] || [];
+  const page = pages[currentPage - 1];
 
   return (
     <main className="paper-shell">
@@ -156,40 +147,7 @@ export default async function HomePage({ searchParams }) {
         <EmptyState />
       ) : (
         <>
-          <section className="lead-grid">
-            <article className="lead-story">
-              <h2>{lead.title}</h2>
-              <div className={`article-card-body ${articleBodyColumns(lead)}`}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{lead.content}</ReactMarkdown>
-              </div>
-            </article>
-            <aside className="index-box">
-              <p className="kicker">Index</p>
-              {articles.slice(0, 6).map((article) => (
-                <div key={article.slug}>
-                  <span>{article.category}</span>
-                  {article.title}
-                </div>
-              ))}
-            </aside>
-          </section>
-
-          {pageArticles.length > 0 && (
-            <section className="article-grid" aria-label="More articles">
-              {pageArticles.map((article, index) => {
-                const layout = articleLayout(article, index);
-
-                return (
-                  <article key={article.slug} className={`article-card ${layout}`}>
-                    <h2>{article.title}</h2>
-                    <div className={`article-card-body ${articleBodyColumns(article)}`}>
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.content}</ReactMarkdown>
-                    </div>
-                  </article>
-                );
-              })}
-            </section>
-          )}
+          <NewspaperPage page={page} pageNumber={currentPage} totalPages={totalPages} />
 
           {totalPages > 1 && (
             <nav className="edition-pagination" aria-label="Newspaper pages">
