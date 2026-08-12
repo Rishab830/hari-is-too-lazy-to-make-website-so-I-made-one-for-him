@@ -6,10 +6,10 @@ date: 2026-07-30
 slug: museum-adds-student-guided-tours
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra risus vitae ligula iaculis, in commodo dui blandit.
+The city museum introduced short student-led tours on weekends, giving school and college volunteers a chance to guide visitors through the local history galleries.
 
 ## New Guides
 
-Pellentesque id ligula et nulla euismod volutpat. Nunc id dolor eu metus aliquam tincidunt vitae sit amet odio.
+The first group trained for three Saturdays with curators, learning how to explain trade maps, pottery fragments, and photographs from the railway expansion years.
 
-Sed id justo nec est eleifend tempus.
+Museum staff said the tours are designed for families who want a faster visit than the full curator walk.

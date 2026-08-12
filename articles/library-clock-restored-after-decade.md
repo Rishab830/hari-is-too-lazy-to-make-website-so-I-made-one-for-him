@@ -6,10 +6,10 @@ date: 2026-08-06
 slug: library-clock-restored-after-decade
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed ipsum vel nunc hendrerit mattis. Etiam luctus sapien a arcu efficitur, vitae bibendum elit dapibus.
+The long-silent clock above the central library rang again after a volunteer repair team completed months of careful restoration work on the gears, bell arm, and weathered face.
 
 ## Time Returns
 
-Curabitur condimentum magna at dolor sagittis, non aliquet dolor eleifend. Nam varius mi id neque porta, id finibus nisl luctus.
+The first chime sounded at noon while readers gathered on the front steps. Library staff said the clock had stopped nearly ten years ago after water entered the tower during a storm.
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec sed sem a magna consequat accumsan.
+The restoration team will monitor the mechanism weekly through the monsoon season before deciding whether to reopen the tower for guided heritage visits.

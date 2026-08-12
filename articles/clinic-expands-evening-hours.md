@@ -6,10 +6,10 @@ date: 2026-07-31
 slug: clinic-expands-evening-hours
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis laoreet dolor vel gravida fringilla. Donec interdum mauris vitae est pulvinar tempor.
+The municipal clinic will keep two counters open until 8 p.m. on weekdays so working families can collect reports, refill routine prescriptions, and schedule follow-up visits after office hours.
 
 ## After Work Care
 
-Aliquam erat volutpat. Cras posuere eros et tellus sodales, eget semper libero scelerisque. Etiam a elit nec dolor vehicula malesuada.
+Clinic superintendent Dr. Farah Khan said the evening window is aimed at patients who were missing appointments because the earlier schedule overlapped with factory and shop shifts.
 
-Ut luctus tortor sed elit luctus, vel sodales est dignissim.
+The trial will run for six weeks. If demand remains steady, the health bureau will add one nurse and one pharmacist to the evening roster.

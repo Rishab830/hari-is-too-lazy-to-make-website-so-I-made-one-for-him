@@ -6,10 +6,10 @@ date: 2026-07-29
 slug: old-bridge-lights-tested
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur orci id erat blandit, id convallis tellus egestas.
+Workers tested the first row of restored lamps along the old bridge, giving pedestrians a preview of the warmer lighting planned for the full crossing.
 
 ## A Softer Glow
 
-Vivamus consequat lorem eget est dictum, eget tristique mi pellentesque. Integer pulvinar nulla in erat dignissim, vitae ornare eros mollis.
+The new fixtures are built to match the bridge railings but use shielded LED bulbs to reduce glare for drivers and nearby homes.
 
-Proin at urna a quam aliquam aliquet.
+The public works department expects to finish the remaining lamp posts before the festival season.
